@@ -1,0 +1,30 @@
+import { Router } from "express";
+import  {switchRol,getUsersById,documents,profile} from "../controllers/users.controller.js";
+
+import __dirname from "../utils.js";
+
+import { uploadDocuments} from "../dirname.js";
+
+
+export const usersRouter = Router();
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+usersRouter.get("/:uid",getUsersById);
+
+//////////////////////////////////////////////////////////////////////////////////////
+usersRouter.get("/premium/:uid",switchRol);
+
+//////////////////////////////////////////////////////////////////////////////////////
+//carga de documentos para un usuario
+usersRouter.post("/:uid/documents", uploadDocuments.fields([{ name: 'document'}]), documents);
+//////////////////////////////////////////////////////////////////////////////////////
+//carga una imagen para el profile de la persona
+usersRouter.post("/:uid/profile", uploadDocuments.fields([{ name: 'profile'}]), profile);
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+export default usersRouter;
